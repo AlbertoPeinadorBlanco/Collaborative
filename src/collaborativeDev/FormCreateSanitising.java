@@ -25,12 +25,12 @@ import java.util.logging.Logger;
  * 
  * JFrame to display UI for creating customer subscriptions
  */
-public class FormCreateReservation extends javax.swing.JFrame {
+public class FormCreateSanitising extends javax.swing.JFrame {
 
     /**
      * Creates new form OrderCreationForm
      */
-    public FormCreateReservation() {
+    public FormCreateSanitising() {
         initComponents();
     }
    
@@ -78,7 +78,7 @@ public class FormCreateReservation extends javax.swing.JFrame {
         lblDate.setText("jLabel");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Reservation Creation");
+        jLabel2.setText("Sanitising Order");
 
         lblUser.setText("jLable1");
 
@@ -108,23 +108,23 @@ public class FormCreateReservation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDate))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnReservation)
-                                    .addComponent(cbItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbItemType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 137, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(dcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbItemType, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbItem, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnReservation)
+                                        .addGap(12, 12, 12)))))
+                        .addGap(0, 139, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -146,19 +146,18 @@ public class FormCreateReservation extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnReservation))
+                    .addComponent(jLabel4)
                     .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83))
+                .addGap(48, 48, 48)
+                .addComponent(btnReservation)
+                .addGap(84, 84, 84))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ICreateData iCreateReservation = new CreateReservation();
-    CreateDataInjector createReservation = new CreateDataInjector(iCreateReservation);
+    ICreateData iCreateSanitising = new CreateSanitising();
+    CreateDataInjector createSanitising = new CreateDataInjector(iCreateSanitising);
     
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     Date startDate;
@@ -176,29 +175,28 @@ public class FormCreateReservation extends javax.swing.JFrame {
         Date date = dcDate.getDate();
 
         
-        String reservationDate = df.format(date);
+        String sanitisingDate = df.format(date);
         String formattedDate = today.format(pattern); 
 
 
 
         int dataCheck = JOptionPane.showConfirmDialog(null, "Please ensure that you are inputing the correct data.\n"
                         + "Item Type =  " + cbItemType.getSelectedItem() +"\n"+ "Item Name = " + 
-                    cbItem.getSelectedItem() + "\n" + "Desired Date = " + reservationDate
+                    cbItem.getSelectedItem() + "\n" + "Sanitising Date = " + formattedDate
                         , "Confirm Data!", JOptionPane.YES_NO_OPTION);
             
             
             if(dataCheck == JOptionPane.YES_OPTION){
                 
                 int id = cbItem.getSelectedIndex()+1;
-                String userID =String.valueOf(LoggedUser.userID);
                 String itemID = String.valueOf(id);
-                String reservation = itemID + "_" + formattedDate + "_" + reservationDate + "_" + userID;
+                String reservation = itemID + "_" + formattedDate + "_" + sanitisingDate;
                 
-                createReservation.dataCreate(reservation);
+                createSanitising.dataCreate(reservation);
                 
                 
                 
-                JOptionPane.showMessageDialog(null, "Reservation placed!" + "\n" + "Waiting Admin Response.");
+                JOptionPane.showMessageDialog(null, "Sanitising request placed!");
                 
             }
           
@@ -244,28 +242,15 @@ public class FormCreateReservation extends javax.swing.JFrame {
         } 
         catch (ParseException ex) {
             
-            Logger.getLogger(FormCreateReservation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormCreateSanitising.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }//GEN-LAST:event_formWindowOpened
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        if("1".equals(LoggedUser.role)){
-             FormReservations fR = new FormReservations();
-            fR.setVisible(true);
-            this.dispose();
-        }
-        if("3".equals(LoggedUser.role)){
-            this.dispose();
-        }
-       
-        
-    }//GEN-LAST:event_formWindowClosed
-
     private void cbItemTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbItemTypeItemStateChanged
         // TODO add your handling code here:
+        
         int id = cbItemType.getSelectedIndex();
         String idData = String.valueOf(id);
         
@@ -290,6 +275,16 @@ public class FormCreateReservation extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbItemTypeItemStateChanged
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        
+        FormSanitising fS = new FormSanitising();
+        fS.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_formWindowClosed
+
         
     
     /**
@@ -309,14 +304,22 @@ public class FormCreateReservation extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCreateReservation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCreateSanitising.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCreateReservation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCreateSanitising.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCreateReservation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCreateSanitising.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormCreateReservation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCreateSanitising.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -329,7 +332,7 @@ public class FormCreateReservation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCreateReservation().setVisible(true);
+                new FormCreateSanitising().setVisible(true);
             }
         });
     }

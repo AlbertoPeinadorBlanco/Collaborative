@@ -4,6 +4,8 @@
  */
 package collaborativeDev;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author jazzm
@@ -28,8 +30,8 @@ public class FormStudent extends javax.swing.JFrame {
 
         btnCreateReservation = new javax.swing.JButton();
         btnReservations = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -38,6 +40,9 @@ public class FormStudent extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -55,9 +60,9 @@ public class FormStudent extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        lblDate.setText("jLabel1");
 
-        jLabel2.setText("jLabel2");
+        lblUser.setText("jLabel2");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Student");
@@ -76,9 +81,9 @@ public class FormStudent extends javax.swing.JFrame {
                             .addComponent(btnReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblDate)
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(167, 167, 167)
@@ -90,8 +95,8 @@ public class FormStudent extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lblDate)
+                    .addComponent(lblUser))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(48, 48, 48)
@@ -124,6 +129,14 @@ public class FormStudent extends javax.swing.JFrame {
         fL.setVisible(true);
         
     }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        lblUser.setText(LoggedUser.userName);
+        lblDate.setText(LocalDate.now().toString());
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -164,8 +177,8 @@ public class FormStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateReservation;
     private javax.swing.JButton btnReservations;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 }
