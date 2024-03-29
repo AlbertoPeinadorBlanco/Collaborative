@@ -169,10 +169,19 @@ public class FormCreateUser extends javax.swing.JFrame {
             String roleID;
             
             if(cbRole.getSelectedItem().toString().toLowerCase().equals("student")){
+                
                 roleID  = "3";
+                
+            }
+            if(cbRole.getSelectedItem().toString().toLowerCase().equals("staff")){
+                
+                roleID  = "2";
+                
             }
             else{
+                
                 roleID = "1";
+                
             }
             
             int dataCheck = JOptionPane.showConfirmDialog(null, "Please ensure that you are inputing the correct data.\n Username = "
@@ -202,9 +211,12 @@ public class FormCreateUser extends javax.swing.JFrame {
         
         String actor = "Student";
         String admin = "Admin";
+        String staff = "Staff";
+
         
         cbRole.addItem(admin);
         cbRole.addItem(actor);
+        cbRole.addItem(staff);
 
           
         lblDate.setText(LocalDate.now().toString());
