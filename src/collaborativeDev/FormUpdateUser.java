@@ -178,6 +178,7 @@ public class FormUpdateUser extends javax.swing.JFrame {
         
         cbRole.addItem("Admin");
         cbRole.addItem("Student");
+        cbRole.addItem("Staff");
         
         lblName.setText(StaticData.name);
         lblID.setText(StaticData.id);
@@ -192,10 +193,18 @@ public class FormUpdateUser extends javax.swing.JFrame {
         String roleID;
         
         if(cbRole.getSelectedItem().toString().toLowerCase().equals("student")){
+            
             roleID  = "3";
+            
+        }
+        if(cbRole.getSelectedItem().toString().toLowerCase().equals("staff")){
+            
+            roleID  = "2";
         }
         else{
+            
             roleID = "1";
+            
         }
 
         if(pfPassword.getPassword().equals("")){
@@ -206,7 +215,7 @@ public class FormUpdateUser extends javax.swing.JFrame {
             
             int dataCheck = JOptionPane.showConfirmDialog(null, "Please ensure that you are inputing the correct data.\n Username = "
                         + lblName.getText() + "\n" +"Password = " + pfPassword.getText() + "\n" 
-                        + "Role = " + cbRole.getSelectedItem() , "Confirm Data!", JOptionPane.YES_NO_OPTION);
+                        + "Role = " + cbRole.getSelectedItem().toString() , "Confirm Data!", JOptionPane.YES_NO_OPTION);
                 
             if(dataCheck == JOptionPane.YES_OPTION){
                
