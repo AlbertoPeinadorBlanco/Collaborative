@@ -81,6 +81,15 @@ public class UserLogin implements IUserLogin{
                    LoggedUser.userID = id;
                     
                 }
+                if(role == 2){
+                    
+                    FormStaff fSt = new FormStaff();
+                    fSt.setVisible(true);
+                    value = 1;
+                    LoggedUser.role = "staff";
+                    LoggedUser.userID = id;
+
+                }
                 if(role == 3){
                     
                     FormStudent fS = new FormStudent();
@@ -97,7 +106,7 @@ public class UserLogin implements IUserLogin{
                     
                     value = 0;
                 }
-                else if (role != 1 && role != 3){
+                else if (role != 1 && role != 3 && role != 2){
                     
                     JOptionPane.showMessageDialog(null, "Invalid username or password entered");
                     
